@@ -3,7 +3,8 @@ function Juego(){
 	this.crearPartida=function(num, owner){
 		let codigo=this.obtenerCodigo();
 		if (!this.partidas[codigo]){
-			this.partidas[codigo]=new Partida(num, owner);
+			this.partidas[codigo]=new Partida(num, owner.nick);
+			owner.partida = this.partidas[codigo];
 		}
 		//generar un codigo de 6 letras aleatorio
 		//comprobar que no está en uso
@@ -12,7 +13,7 @@ function Juego(){
 	}
 	this unirAPartida=function(codigo, nick){
 		if(this.partidas[codigo]){
-			this.partidas[]
+			this.partidas[].agregarUsuario(nick);
 		}
 
 	}
@@ -40,6 +41,12 @@ function randomInt(low, high) {
 
 function Usuario(nick){
 	this.nick = nick;
+	this.iniciarPartida=function(){
+		this.partida.iniciarPartida(num, this);
+	}
+	this.crearPartida=function(num){
+
+	}
 }
 
 function Partida (num, owner){
@@ -66,8 +73,12 @@ function Partida (num, owner){
 		//comprobar si se ha llegado al usuario num
 	}
 	this.agregarUsuario(owner);
-
-
+	this iniciarPartida=function(){
+		this.fase.iniciarPartida(this);
+	}
+	this.crearPartida=function(){
+		
+	}
 }
 
 function Inicial(){
@@ -75,16 +86,23 @@ function Inicial(){
 		partida.puedeagregarUsuario(nick);
 	}
 }
+function Completado(){
+	this.iniciarPartida=function(partida){
+		partida.fase=new Jugando();
+	}
+}
 
 function Jugando(){
 	this.agregarUsuario=function(nick, partida){
 		//this.puedeagregarUsuario(nick);
+		console.log("La partida ya ha comenzado");
 	}
 }
 
 function Final(){
 	this.agregarUsuario=function(nick, partida){
 		//this.puedeagregarUsuario(nick);
+		console.log("La partida ya ha comenzado");
 	}
 }
 
