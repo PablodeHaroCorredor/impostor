@@ -9,9 +9,12 @@ function Juego(){
 		return codigo;
 	}
 	this.unirAPartida=function(codigo,nick){
+		var res=-1;
 		if (this.partidas[codigo]){
-			this.partidas[codigo].agregarUsuario(nick);
+			res=this.partidas[codigo].agregarUsuario(nick);
+
 		}
+		return res;
 	}
 	
 	this.obtenerCodigo=function(){
@@ -161,3 +164,6 @@ function inicio(){
 	juego.unirAPartida(codigo, "pep");
 	usr.iniciarPartida();
 }
+
+module.exports.Juego=Juego;
+module.exports.Usuario=Usuario;
