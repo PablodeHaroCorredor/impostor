@@ -33,10 +33,10 @@ app.get('/nuevoUsuario/:nick:/num', function(request, response){
 	response.send({"codigo":codigo});
 });
 
-app.get("/crearPartida/:nick/:num",function(request, response){
+app.get("/crearPartida/:nick/:numero",function(request, response){
 var nick=request.params.nick;
 	var usr=new modelo.Usuario(nick);
-	var num= parseInt(request.paramas.num);
+	var num= parseInt(request.params.numero);
 	var codigo=juego.crearPartida(num, usr);
 
 	response.send({"codigo":codigo});
@@ -48,6 +48,14 @@ app.get("/unirAPartida/:nick/:codigo",function(request, response){
 	var res=juego.unirAPartida(codigo, nick);
 	response.send({"res":res});
 } );
+
+app.get("/listaPartidas",function(request, response){
+	
+	var lista=juego.listaPartidas();
+	response.send(lista);
+} );
+
+
 server.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
 });
